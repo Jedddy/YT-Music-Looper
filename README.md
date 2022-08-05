@@ -10,4 +10,4 @@ Download location somewhere near the script inside "dl_music" it'll get deleted 
 <br/>
 
 
-<img src="https://ibb.co/St3PKWb" width=200/>
+<img src="https://imgur.com/a/VGGPWTp" width=200/>
