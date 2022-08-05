@@ -1,4 +1,6 @@
-#Youtube Player Widget made with Tkinter.
+# Youtube-Player-Widget
+
+Made with Tkinter.
 <br/>
 Play Music on Loop with this Youtube Player Widget!
 <br/>
