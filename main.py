@@ -111,7 +111,6 @@ def pause():
 def stop():
     global is_playing
 
-
     if not is_playing:
         pass
     else:
@@ -129,11 +128,13 @@ def stop():
 
 def volume_up():
     global VOLUME
+
     VOLUME += 0.1
     pygame.mixer.music.set_volume(VOLUME)
 
 def volume_down():
     global VOLUME
+    
     VOLUME -= 0.1
     pygame.mixer.music.set_volume(VOLUME)
 
