@@ -33,6 +33,9 @@ def pygame_player():
     """Player Function"""
     song_name = get_song_name()
 
+    if pygame.mixer.get_init() is None:
+        pygame.mixer.init()
+
     pygame.mixer.music.load(f"./dl_music/{song_name}")
         
     pygame.mixer.music.set_volume(VOLUME)
@@ -46,10 +49,9 @@ def download():
     """Starting name for the downloaded MP3 file,
 
     that way os.listdir("./dl_music/")[0] will always return the last downloaded MP3."""
-
+    
     starting_name = 999
     starting_name -= len(os.listdir("./dl_music/"))
-
 
     # YTDL Options
     ydl_opts = {
@@ -65,15 +67,15 @@ def download():
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl: 
                 ydl.download([link_entry.get()])
-                
+
     except Exception as e:
         print("Download exception: " + str(e))
-
+    
 
 def play_music():
     """Play Music"""
     global is_playing
-
+    
     download()
 
     song_name = get_song_name()
@@ -94,10 +96,7 @@ def pause():
     global is_paused
     global is_playing
 
-    if not is_playing:
-        pass
-
-    else:
+    if is_playing:
         if is_paused:
             pygame.mixer.music.unpause()
             pause_btn.config(mnfrm, text="Pause")
@@ -111,9 +110,7 @@ def pause():
 def stop():
     global is_playing
 
-    if not is_playing:
-        pass
-    else:
+    if is_playing:
         pygame.mixer.music.stop()
         is_playing = False
 
