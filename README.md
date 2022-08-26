@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-#Play Youtube Music in Loop
+
 
 Youtube Player Widget made with Tkinter.
-=======
-# Youtube-Player-Widget
 
-Made with Tkinter.
->>>>>>> 5d077a9443dc9c2f6efdaf2b8233ee73815b3926
+
 <br/>
 Play Music on Loop with this Youtube Player Widget!
 <br/>
@@ -16,8 +12,7 @@ Download location somewhere near the script inside "dl_music" it'll get deleted 
 <br/>
 
 
-<<<<<<< HEAD
+
 <img src="https://imgur.com/a/VGGPWTp" width=200/>
 =======
 <img src="https://i.imgur.com/pVwwm9c.png" width=500/>
->>>>>>> 5d077a9443dc9c2f6efdaf2b8233ee73815b3926
