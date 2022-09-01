@@ -16,8 +16,11 @@ except FileExistsError:
 pygame.mixer.init() # Initialize Mixer
 
 class YTMusicPLayer(ttk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, master=Tk()):
         super().__init__(master)
+        self.master.title("Youtube Loop Player")
+        self.master.minsize(480, 270)
+        self.master.maxsize(480, 270)
         self.is_paused = False
         self.is_playing = False
         self.volume = 0.5
@@ -137,8 +140,6 @@ class YTMusicPLayer(ttk.Frame):
         while pygame.mixer.music.get_busy():
             pygame.time.Clock().tick(10)
 
-
+# root = Tk()
 ytplayer = YTMusicPLayer()
-ytplayer.master.minsize(480, 270)
-ytplayer.master.maxsize(480, 270)
 ytplayer.mainloop()
