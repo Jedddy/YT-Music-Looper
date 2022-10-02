@@ -4,7 +4,7 @@ import pygame
 import yt_dlp
 import os
 import threading
-
+import time
 
 """Create the Music Directory
 Initialize PyGame mixer"""
@@ -25,9 +25,9 @@ class YTMusicPLayer(ttk.Frame):
         self.is_playing = False
         self.volume = 0.5
         self.playing_label = ttk.Label(text="Insert Youtube link...", font="Times 10 italic bold")
-        self.playing_label.place(relx=0.5, rely=0.5, anchor="center")
+        self.playing_label.place(relx=0.5, rely=0.3, anchor="center")
         self.link_entry = ttk.Entry(width=40)
-        self.link_entry.place(relx=0.5, rely=0.4, anchor="center")
+        self.link_entry.place(relx=0.5, rely=0.2, anchor="center")
         self.play_btn = ttk.Button(text="Play", command=self.play_music)
         self.play_btn.place(relx=0.5, rely=0.6, anchor="center")
         self.pause_btn = ttk.Button(text="Pause", command=self.pause)
@@ -40,11 +40,23 @@ class YTMusicPLayer(ttk.Frame):
         self.volumedown_btn.place(relx=0.6, rely=0.75, anchor="center")
         self.informer = ttk.Label(text="Nothing is playing at the moment.",
                                   font="Times 10 italic bold")
-        self.informer.place(relx=0.5, rely=0.3, anchor="center")
+        self.informer.place(relx=0.5, rely=0.1, anchor="center")
+        self.status_bar = ttk.Label(text="", font="Times 10 italic bold")
+        self.status_bar.place(relx=0.5, rely=0.4, anchor="center")
+        # self.slider = ttk.Scale()
+        # self.slider.place(relx=0.5, rely=0.5, anchor="center")
 
         # Create a new Thread
+        self.p_thread = threading.Thread(target=self.music_time)
+        self.p_thread.start()
         self.music_thread = threading.Thread(target=self.playing_thread)
         self.music_thread.start()
+
+    def music_time(self):
+        cur = pygame.mixer.music.get_pos()/1000
+        mtime = time.strftime("%H:%M:%S", time.gmtime(cur))
+        self.status_bar.config(text=f"Elapsed time: {mtime if cur > 0 else '00:00:00'}")
+        self.status_bar.after(1000, self.music_time)
 
     def get_song_name(self):
         """Gets song name from directory"""
@@ -125,6 +137,7 @@ class YTMusicPLayer(ttk.Frame):
             # Removes all files inside the music directory
             for i in os.listdir("./dl_music/"):
                 os.remove(f"./dl_music/{i}")
+            self.status_bar.config(text="00:00:00")
 
     def volume_up(self):
         self.volume += 0.1
